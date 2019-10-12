@@ -1,0 +1,22 @@
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http://tmtdesigns.net/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://tmtdesigns.net$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.tmtdesigns.net/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.tmtdesigns.net$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://tmtdesigns.net/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://tmtdesigns.net$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.tmtdesigns.net/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.tmtdesigns.net$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
+ErrorDocument 404 /error-404.php
+
+Options +FollowSymlinks
+RewriteEngine on
+rewritecond %{http_host} ^tmtdesigns.net [nc]
+rewriterule ^(.*)$ http://www.tmtdesigns.net/$1 [r=301,nc]
+
+<ifModule mod_headers.c>
+Header set X-XSS-Protection "1; mode=block"
+Header always append X-Frame-Options SAMEORIGIN
+Header set X-Content-Type-Options: "nosniff”
+</ifModule>
